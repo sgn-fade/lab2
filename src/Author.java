@@ -13,4 +13,11 @@ public class Author extends Human {
     public void setPseudonym(String pseudonym) {
         this.pseudonym = pseudonym;
     }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "pseudonym='" + pseudonym + '\'' +
+                '}';
+    }
 }

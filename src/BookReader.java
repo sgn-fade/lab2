@@ -1,14 +1,29 @@
+
 import java.util.ArrayList;
 
 public class BookReader extends Human {
     private int id;
     private ArrayList<Book> books;
 
+    @Override
+    public String toString() {
+        return "BookReader{" +
+                "id=" + id +
+                ", books=" + books +
+                '}';
+    }
+
     public BookReader(String name, String surname, int id, ArrayList<Book> books) {
         this.setName(name);
         this.setSurname(surname);
         this.id = id;
         this.books = books;
+    }
+
+    public BookReader(String name, String surname, int id) {
+        this.setName(name);
+        this.setSurname(surname);
+        this.id = id;
     }
 
     public int getId() {
@@ -24,6 +39,10 @@ public class BookReader extends Human {
     }
 
     public void setBooks(ArrayList<Book> books) {
+        this.books = books;
+    }
+
+    public void addBooks(ArrayList<Book> books) {
         this.books = books;
     }
 }
