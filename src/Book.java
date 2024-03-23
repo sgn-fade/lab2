@@ -1,7 +1,30 @@
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Book {
+public class Book implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    public Book(String name, ArrayList<Author> authors, int publish_year, int publish_number) {
+        Name = name;
+        this.authors = authors;
+        this.publish_year = publish_year;
+        this.publish_number = publish_number;
+    }
+
     private String Name;
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "Name='" + Name + '\'' +
+                ", authors=" + authors +
+                ", publish_year=" + publish_year +
+                ", publish_number=" + publish_number +
+                '}';
+    }
+
     private ArrayList<Author> authors;
     private int publish_year;
     private int publish_number;

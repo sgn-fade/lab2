@@ -1,4 +1,9 @@
-public abstract class Human {
+import java.io.Serial;
+import java.io.Serializable;
+
+public abstract class Human implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private String name;
     private String surname;
 

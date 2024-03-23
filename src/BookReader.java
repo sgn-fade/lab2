@@ -1,6 +1,18 @@
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BookReader extends Human {
+public class BookReader extends Human implements Serializable {
+    @Override
+    public String toString() {
+        return "BookReader{" +
+                "id=" + id +
+                ", books=" + books +
+                '}';
+    }
+
+    @Serial
+    private static final long serialVersionUID = 1L;
     private int id;
     private ArrayList<Book> books;
 
