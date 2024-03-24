@@ -1,6 +1,9 @@
+import java.io.*;
 import java.util.ArrayList;
 
-public class BookReader extends Human {
+public class BookReader extends Human implements Externalizable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private int id;
     private ArrayList<Book> books;
 
@@ -9,6 +12,9 @@ public class BookReader extends Human {
         this.setSurname(surname);
         this.id = id;
         this.books = books;
+    }
+
+    public BookReader() {
     }
 
     public int getId() {
@@ -25,5 +31,23 @@ public class BookReader extends Human {
 
     public void setBooks(ArrayList<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeInt(getId());
+        out.writeInt(books.size());
+        for(Book b: books) {
+            out.writeObject(b);
+        }
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        setId(in.readInt());
+        int bookSize = in.readInt();
+        for (int i = 0; i < bookSize; i++) {
+            books.add((Book) in.readObject());
+        }
     }
 }
