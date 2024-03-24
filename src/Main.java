@@ -13,7 +13,6 @@ public class Main {
         store.add(new BookStore(books, "fantasy"));
 
         Library library =  new Library("first lib", readers, store);
-
         serializeObject("library.ser", library);
         System.out.println(deSerializeObject("library.ser"));
     }
