@@ -29,6 +29,13 @@ public class Author extends Human implements Externalizable {
     }
 
     @Override
+    public String toString() {
+        return "Author{" +
+                "pseudonym='" + pseudonym + '\'' +
+                '}';
+    }
+
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         setName((String) in.readObject());
         setSurname((String) in.readObject());

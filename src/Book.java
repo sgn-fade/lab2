@@ -49,8 +49,8 @@ public class Book implements Externalizable {
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeObject(getName());
         out.writeInt(authors.size());
-        for(Author author: authors) {
-            out.writeObject(author);
+        for(Externalizable author: authors) {
+            author.writeExternal(out);
         }
         out.writeInt(getPublish_year());
         out.writeInt(getPublish_number());
@@ -60,11 +60,24 @@ public class Book implements Externalizable {
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         setName((String) in.readObject());
         int authSize = in.readInt();
+        authors = new ArrayList<>();
         for (int i = 0; i < authSize; i++) {
-            authors.add((Author) in.readObject());
+            Author ext = new Author();
+            ext.readExternal(in);
+            authors.add(ext);
         }
         setPublish_year(in.readInt());
         setPublish_number(in.readInt());
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "Name='" + Name + '\'' +
+                ", authors=" + authors +
+                ", publish_year=" + publish_year +
+                ", publish_number=" + publish_number +
+                '}';
     }
 
     public Book(String name, int publish_year, int publish_number) {

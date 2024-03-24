@@ -11,6 +11,12 @@ public class Library implements Externalizable {
     public Library() {
     }
 
+    public Library(String name, ArrayList<BookReader> readers, ArrayList<BookStore> stores) {
+        this.name = name;
+        this.readers = readers;
+        this.stores = stores;
+    }
+
     public String getName() {
         return name;
     }
@@ -39,25 +45,44 @@ public class Library implements Externalizable {
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeObject(getName());
         out.writeInt(readers.size());
-        for(BookReader reader : readers){
-            out.writeObject(reader);
+        for(Externalizable reader : readers){
+            reader.writeExternal(out);
+
         }
         out.writeInt(stores.size());
-        for(BookStore store: stores){
-            out.writeObject(store);
+        for(Externalizable store: stores){
+            store.writeExternal(out);
+
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Library{" +
+                "name='" + name + '\'' +
+                ", readers=" + readers +
+                ", stores=" + stores +
+                '}';
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         setName((String) in.readObject());
         int readersSize = in.readInt();
+        readers = new ArrayList<>();
+
         for (int i = 0; i < readersSize; i++) {
-            readers.add((BookReader) in.readObject());
+            BookReader ext = new BookReader();
+            ext.readExternal(in);
+            readers.add(ext);
         }
         int storesSize = in.readInt();
+        stores = new ArrayList<>();
+
         for (int i = 0; i < storesSize; i++) {
-            stores.add((BookStore) in.readObject());
+            BookStore ext = new BookStore();
+            ext.readExternal(in);
+            stores.add(ext);
         }
     }
 }

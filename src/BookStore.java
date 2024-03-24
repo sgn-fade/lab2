@@ -35,17 +35,29 @@ public class BookStore implements Externalizable {
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeObject(getStoreName());
         out.writeInt(books.size());
-        for(Book b: books) {
-            out.writeObject(b);
+        for(Externalizable b: books) {
+            b.writeExternal(out);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "BookStore{" +
+                "books=" + books +
+                ", storeName='" + storeName + '\'' +
+                '}';
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         setStoreName((String) in.readObject());
         int bookSize = in.readInt();
+        books = new ArrayList<>();
+
         for (int i = 0; i < bookSize; i++) {
-            books.add((Book) in.readObject());
+            Book ext = new Book();
+            ext.readExternal(in);
+            books.add(ext);
         }
     }
 }
