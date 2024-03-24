@@ -51,8 +51,11 @@ public class Library implements Serializable {
                     authors.add(a);
                 }
                 b.addAuthors(authors);
+                books.add(b);
             }
             reader.addBooks(books);
+            readers.add(reader);
+
         }
     }
 

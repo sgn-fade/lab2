@@ -11,6 +11,7 @@ public class Main {
         readers.add(new BookReader("Ivan", "Migun", 1, books));
         ArrayList<BookStore> store = new ArrayList<>();
         store.add(new BookStore(books, "fantasy"));
+
         Library library =  new Library("first lib", readers, store);
 
         serializeObject("library.ser", library);

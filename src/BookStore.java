@@ -40,6 +40,7 @@ public class BookStore implements Serializable {
                 authors.add(a);
             }
             b.addAuthors(authors);
+            books.add(b);
         }
     }
     public ArrayList<Book> getBooks() {
